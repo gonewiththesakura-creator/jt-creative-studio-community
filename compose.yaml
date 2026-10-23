@@ -1,0 +1,25 @@
+services:
+  jt:
+    build: .
+    env_file: .env
+    environment:
+      JT_BIND: "0.0.0.0"
+      JT_PORT: "8189"
+      JT_DATA_DIR: /data
+    ports:
+      - "127.0.0.1:8189:8189"
+    volumes:
+      - jt-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 768m
+    restart: unless-stopped
+    stop_grace_period: 10s
+volumes:
+  jt-data:

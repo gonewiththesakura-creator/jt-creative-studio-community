@@ -1,0 +1,10 @@
+**
+!requirements.txt
+!LICENSE
+!THIRD-PARTY.md
+!jt_community/
+!jt_community/*.py
+!static/
+!static/index.html
+!static/app.js
+!static/style.css

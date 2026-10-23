@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f4f6f2">
+  <meta name="description" content="JT 社区版，一个专注于创作的单用户图像工作台。">
+  <title>JT 灵感工作台 · 社区版</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转到创作区</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="JT 灵感工作台首页"><span class="brand-mark" aria-hidden="true">jt<span>·</span></span><span class="brand-name">灵感工作台<span>COMMUNITY EDITION</span></span></a>
+    <div class="header-right"><span class="review-label">独立预览版</span><button id="logout-button" class="text-button" type="button" hidden>退出</button></div>
+  </header>
+
+  <main id="main">
+    <section id="auth-view" class="auth-view" aria-labelledby="auth-heading">
+      <div class="auth-decoration" aria-hidden="true"><span class="mini-frame"></span><span class="mini-sun"></span></div>
+      <p class="eyebrow">A LITTLE SPACE FOR BIG IDEAS</p>
+      <h1 id="auth-heading">灵感，从这里开始。</h1>
+      <p class="auth-copy">属于你一个人的图像创作空间。<br>输入访问口令，回到工作台。</p>
+      <form id="login-form" class="login-form">
+        <label for="token">访问口令</label>
+        <input id="token" name="token" type="password" autocomplete="current-password" required placeholder="输入部署时设置的口令" aria-describedby="auth-note" autofocus>
+        <button id="login-button" class="button primary" type="submit">进入工作台 <span aria-hidden="true">↗</span></button>
+        <p id="login-error" class="form-error" role="alert" hidden></p>
+      </form>
+      <p id="auth-note" class="fine-print">口令不会写入浏览器本地存储。<br>生成内容会发送到部署者配置的图像服务。</p>
+    </section>
+
+    <div id="workspace" class="workspace" hidden>
+      <section class="intro" aria-labelledby="workspace-heading">
+        <div><p class="eyebrow">YOUR IDEAS, IN FOCUS</p><h1 id="workspace-heading">把灵感，变成一张图<span>。</span></h1><p class="intro-copy">从一句描述开始，留住每一次好想法。</p></div>
+        <div class="provider-pill"><span id="provider-dot" class="status-dot" aria-hidden="true"></span><span id="provider-status">正在读取服务配置</span></div>
+      </section>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <section id="pending-panel" class="warning-panel" aria-labelledby="pending-heading" hidden>
+        <div><p id="pending-heading" class="warning-title">这次提交的结果还未确认</p><p>请求可能已被接收并产生费用。请先刷新任务记录；如需再次确认，只会使用同一个请求编号与原始参数，不会自动创建新任务。</p><p id="pending-id" class="request-reference"></p></div>
+        <button id="retry-button" class="button secondary" type="button">用原请求重新确认</button>
+      </section>
+      <div class="studio-grid">
+        <section class="editor panel" aria-labelledby="editor-heading">
+          <div class="section-heading"><h2 id="editor-heading">新的创作</h2><span class="section-index">01 / CREATE</span></div>
+          <form id="creator-form">
+            <label class="field-label" for="prompt">画面描述 <span>必填</span></label>
+            <textarea id="prompt" name="prompt" rows="6" maxlength="4000" required placeholder="例如：午后阳光洒进安静的书店，一只橘猫趴在窗边，柔和的胶片色调，细腻的光影。" aria-describedby="prompt-help"></textarea>
+            <div class="field-help"><span id="prompt-help">长描述会压缩，含指令和排除内容合计不超过 1600 字符。</span><span id="prompt-count">0 / 4000</span></div>
+            <details class="negative-details"><summary>排除不想要的内容 <span>可选</span></summary><label class="sr-only" for="negative-prompt">负面提示词</label><textarea id="negative-prompt" name="negative_prompt" rows="2" maxlength="2000" placeholder="例如：文字、水印、模糊画面"></textarea><p class="muted-note">作为补充说明发送，效果取决于图像服务。</p></details>
+            <fieldset class="size-field"><legend>画面比例</legend><div class="size-options">
+              <label class="size-option"><input type="radio" name="size" value="1024x1024" checked><span class="size-choice"><span class="ratio-icon square" aria-hidden="true"></span><span>方形<small>1:1</small></span></span></label>
+              <label class="size-option"><input type="radio" name="size" value="1024x1536"><span class="size-choice"><span class="ratio-icon portrait" aria-hidden="true"></span><span>竖版<small>2:3</small></span></span></label>
+              <label class="size-option"><input type="radio" name="size" value="1536x1024"><span class="size-choice"><span class="ratio-icon landscape" aria-hidden="true"></span><span>横版<small>3:2</small></span></span></label>
+            </div></fieldset>
+            <div class="select-grid"><div><label class="field-label" for="quality">生成质量</label><select id="quality" name="quality"><option value="auto">自动</option><option value="low">低</option><option value="medium">中</option><option value="high">高</option></select></div><div><label class="field-label" for="fit">画面适配</label><select id="fit" name="fit"><option value="cover">铺满裁切</option><option value="contain">完整保留</option></select></div></div>
+            <button id="generate-button" class="button primary generate-button" type="submit"><span id="generate-label">生成图像</span><span aria-hidden="true">↗</span></button>
+            <p id="generate-help" class="generate-help">每次生成可能产生服务费用，请确认参数后提交。</p>
+          </form>
+        </section>
+        <section class="result panel" aria-labelledby="result-heading">
+          <div class="section-heading"><h2 id="result-heading">画布</h2><span id="result-badge" class="result-badge" role="status" aria-live="polite">等待灵感</span></div>
+          <div id="result-content" class="result-content"></div>
+        </section>
+      </div>
+      <section class="history-section" aria-labelledby="history-heading">
+        <div class="history-header"><div><h2 id="history-heading">创作记录 <span id="history-count" class="history-count">0</span></h2><p>任务保存在此部署的服务器中，刷新页面也不会丢失。</p></div><div class="history-tools"><button id="favorites-button" class="chip-button" type="button" aria-pressed="false">只看收藏</button><button id="refresh-button" class="text-button" type="button">刷新记录 <span aria-hidden="true">↻</span></button></div></div>
+        <p id="history-empty" class="history-empty">还没有创作记录。第一张图，从你的描述开始。</p>
+        <div id="history-list" class="history-list"></div>
+      </section>
+      <footer class="workspace-footer"><span>JT COMMUNITY <span aria-hidden="true">/</span> 留一点空间给想象</span><span>单用户 · 无自动付费重试 · <a href="/LICENSE">AGPL-3.0</a></span></footer>
+    </div>
+  </main>
+  <noscript><p class="noscript">请开启 JavaScript 后使用图像工作台。</p></noscript>
+</body>
+</html>
