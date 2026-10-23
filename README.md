@@ -2,7 +2,7 @@
 
 一个单用户、自部署的 JT 创作流程：输入提示词 → 使用自己的模型 API → 查看任务与图片 → 收藏 → 下载 PNG / 导出 JSON。
 
-**当前状态：本地审核候选版，尚未发布。2026-10-22 经所有者确认，此独立社区目录采用 AGPL-3.0-only；不改变原仓库或商业版许可证。没有连接、修改或部署原生产服务。**
+**当前状态：公开审核候选版，已于 2026-10-23 发布源码；尚未完成生产部署验收。2026-10-22 经所有者确认，此独立社区目录采用 AGPL-3.0-only；不改变原仓库或商业版许可证。没有连接、修改或部署原生产服务。**
 
 已在隔离目录安装安全修复版本 Pillow 13.0.0，完成新版依赖回归（73 项通过，6 项真实浏览器测试跳过）。不要部署先前固定 Pillow 12.3.0 的首包。具体状态见 [测试报告](TEST-REPORT.md) 与 [依赖清单](THIRD-PARTY.md)。
 
@@ -29,6 +29,8 @@
 需要 Python 3.12+。唯一运行依赖是 Pillow；测试使用标准库 unittest。
 
 ```bash
+git clone https://github.com/gonewiththesakura-creator/jt-creative-studio-community.git
+cd jt-creative-studio-community
 python -m venv .venv
 . .venv/bin/activate
 python -m pip install -r requirements.txt
@@ -91,4 +93,4 @@ docker compose logs --tail=20
 - [许可证说明](LICENSE-DECISION.md)、[完整 AGPLv3](LICENSE)
 - [依赖及第三方许可清单](THIRD-PARTY.md)
 
-正式公开前仍需完成目标供应商真实端到端及浏览器、部署环境验收，并确认公开仓库目的地。请只发布审核后的这个干净目录，不要复制原仓库的 `.git`、审计资料、生产配置或客户数据。
+本审核候选版源码已公开。投入实际使用前，仍需完成目标供应商真实端到端及浏览器、部署环境验收。本仓库仅包含审核后的干净社区目录，不包含原仓库的 `.git` 历史、审计资料、生产配置或客户数据。

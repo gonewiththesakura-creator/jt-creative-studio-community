@@ -14,4 +14,4 @@ AGPL 允许商业使用。修改版通过网络向用户提供时，需要按条
 - https://opensource.org/license/agpl-3.0
 - https://opensource.org/osd
 
-公开仓库尚未创建。正式对外提供网络服务前，应给界面配置明确、有效的对应源码获取入口，并保留许可证及相关 notice；不能把未创建的仓库地址写成已可访问。当前没有打包依赖二进制，也没有复制原项目的 LoRA / 模型 / 演示图片。本文件是工程发布说明，不是法律意见。
+社区版源码已于 2026-10-23 公开：[jt-creative-studio-community](https://github.com/gonewiththesakura-creator/jt-creative-studio-community)。正式对外提供网络服务前，仍应给界面配置明确、有效的对应源码获取入口，并保留许可证及相关 notice；公开源码不代表已完成网络服务部署。当前没有打包依赖二进制，也没有复制原项目的 LoRA / 模型 / 演示图片。本文件是工程发布说明，不是法律意见。
